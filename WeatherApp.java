@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WeatherApp {
    
    
-    private static final String API_KEY = "408761f5b1e4a80ba92a6e3a73a03b14";//get your api key from openweathermap
+    private static final String API_KEY = "API key";//get your api key from openweathermap
     
 
     @SuppressWarnings("CallToPrintStackTrace")
