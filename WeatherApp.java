@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,13 +19,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WeatherApp {
    
+   
     private static final String API_KEY = "408761f5b1e4a80ba92a6e3a73a03b14";//get your api key from openweathermap
-    private static final String CITY ="delhi";  //can enter any city name(in this code Delhi is mentioned)(you can check the readme file for diffrent city outputs)
-    private static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&appid=" + API_KEY + "&units=metric";
+    
 
     @SuppressWarnings("CallToPrintStackTrace")
     public static void main(String[] args) {
         try {
+            Scanner s=new Scanner(System.in);//to read input
+            System.out.println("enter city name: ");
+            //can enter any city name
+            String CITY =s.nextLine();  //nextLine() takes String input from user
+            String URL = "http://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&appid=" + API_KEY + "&units=metric";
+
             // Make HTTP request
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
@@ -58,7 +65,7 @@ public class WeatherApp {
                     System.out.println("Description: " + description);
                 }
             }
-
+            s.close();//closes the scanner to prevent resource leak
         } catch (IOException | InterruptedException e)
         //adding exception handling to catch IO and Interrupted exceptions.
         {
