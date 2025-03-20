@@ -18,8 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WeatherApp {
    
-    private static final String API_KEY = "408761f5b1e4a80ba92a6e3a73a03b14";
-    private static final String CITY ="texas";  
+    private static final String API_KEY = "408761f5b1e4a80ba92a6e3a73a03b14";//get your api key from openweathermap
+    private static final String CITY ="delhi";  //can enter any city name(in this code Delhi is mentioned)(you can check the readme file for diffrent city outputs)
     private static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&appid=" + API_KEY + "&units=metric";
 
     @SuppressWarnings("CallToPrintStackTrace")
@@ -30,11 +30,14 @@ public class WeatherApp {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(URL))
                     .build();
+                    //We use HttpRequest.newBuilder() to create a GET request to the weather API URL
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            //send request using client.send().
+
 
             // Parse the JSON response
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = new ObjectMapper();//ObjectMapper from Jackson is used to parse the JSON response
             JsonNode rootNode = objectMapper.readTree(response.body());
 
             // Extract and display weather data
@@ -43,10 +46,12 @@ public class WeatherApp {
                 JsonNode weatherNode = rootNode.get("weather").get(0);
                 
                 if (mainNode != null && weatherNode != null) {
+                    //extract the temperature, humidity, and weather description from the JSON structure.
                     double temperature = mainNode.get("temp").asDouble();
                     int humidity = mainNode.get("humidity").asInt();
                     String description = weatherNode.get("description").asText();
 
+                    //displaying the extracted data 
                     System.out.println("Weather in " + CITY + ":");
                     System.out.println("Temperature: " + temperature + "°C");
                     System.out.println("Humidity: " + humidity + "%");
@@ -54,7 +59,9 @@ public class WeatherApp {
                 }
             }
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e)
+        //adding exception handling to catch IO and Interrupted exceptions.
+        {
             e.printStackTrace();
         }
     }
