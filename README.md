@@ -42,6 +42,6 @@ http://api.openweathermap.org/data/2.5/weather?q=Delhi&appid=YOUR_API_KEY&units=
 
 
 
-#OUTPUT
+## OUTPUT
 
 ![Image](https://github.com/user-attachments/assets/ebc88ed7-ca58-4231-bfaa-1ec7471c019d)
